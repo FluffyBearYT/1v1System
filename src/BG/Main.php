@@ -90,8 +90,7 @@ class Main extends PluginBase implements Listener{
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
                 $event->getPlayer()->sendPopup(TextFormat::$color . $tpmsg);
-                }elseif{
-                    $p == "2" {
+                }elseif($p == "2"){
                         $event->getPlayer()->sendMessage($limitmsg);
                         $event->setCancelled();
                     }
