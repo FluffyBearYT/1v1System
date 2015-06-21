@@ -26,3 +26,6 @@ Sign-Create-Message: "[1v1] Sign Created!"
 
 //When a 1v1 SIgn Is Destroyed, This Message WIll Appear:
 Sign-Destroy-Message: "[1v1] Sign Destroyed!"
+
+//When World Is Full, This Message Will Appear:
+World-Full-Message: "[1v1] This Match Is Full!"
