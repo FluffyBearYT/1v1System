@@ -23,6 +23,11 @@ class Main extends PluginBase implements Listener{
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->saveDefaultConfig();
     $config = $this->getConfig();
+    $nopermmsg = $config->get("No-Permission-Message")
+    $tpmsg = $config->get("Telporting-Message")
+    $color = $config->get("Teleporting-Message-Color")
+    $createmsg = $config->get("Sign-Create-Message")
+    $destroymsg = $config->get("Sign-Destroy-Message")
     $world = strtolower(trim($event->getLine(1)))
     $p = //Get the number of players in the specified world
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev" . TextFormat::GREEN . "and " . TextFormat::RED . "FluffyBearYT");
@@ -46,9 +51,9 @@ class Main extends PluginBase implements Listener{
                 $this->sign->setNested("sign.level", $world);
                 $this->sign->save();
                 $this->sign->reload();
-                $player->sendMessage("[1v1] Sign Created!");
+                $player->sendMessage($createmsg);
             }else{
-                $player->sendMessage([1v1] You have no permission!);
+                $player->sendMessage($nopermmsg);
                 $event->setCancelled();
             }
         }
@@ -67,9 +72,9 @@ class Main extends PluginBase implements Listener{
                             $this->sign->setNested("sign.level", "world");
                             $this->sign->save();
                             $this->sign->reload();
-                            $event->getPlayer()->sendMessage("[1v1] Sign destroyed!");
+                            $event->getPlayer()->sendMessage("$destroymsg");
                         }else{
-                            $event->getPlayer()->sendMessage("[1v1] You have no permissions!");
+                            $event->getPlayer()->sendMessage("$nopermmsg");
                             $event->setCancelled();
                         }
                     }
@@ -83,7 +88,7 @@ class Main extends PluginBase implements Listener{
         if($tile instanceof Sign){
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
-                $event->getPlayer()->sendPopup(TextFormat::GREEN . "Teleporting To 1v1 Match!");
+                $event->getPlayer()->sendPopup(TextFormat::$color . $tpmsg);
                 }
 }
                 
