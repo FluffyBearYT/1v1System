@@ -1,1 +1,28 @@
+//Any unpermissioned use of this plugin may be subjected to CopyRights
 
+//If the user isn't OP when trying to create/break a sign, This Message will appear:
+No-Permission-Message: "[1v1] You dont have permission!"
+
+//When The User is teleportig to the 1v1 Match, This POPUP will appear:
+Telporting-Message: Joining 1v1 Match!
+
+//Teleporting Color:
+//Available Colors:
+//USE ALL CAPS
+//GREEN
+//DARK_GREEN
+//RED
+//DARK_RED
+//LIGHT_PURPLE
+//DARK_PURPLE
+//YELLOW
+//AQUA
+//BLUE
+//GOLD
+Teleporting-Message-Color: BLUE
+
+//When a 1v1 Sign Is Created, This Message Will Appear:
+Sign-Create-Message: "[1v1] Sign Created!"
+
+//When a 1v1 SIgn Is Destroyed, This Message WIll Appear:
+Sign-Destroy-Message: "[1v1] Sign Destroyed!"
