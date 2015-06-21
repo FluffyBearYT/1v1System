@@ -9,6 +9,10 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\Config;
+use pocketmine\event\block\SignChangeEvent;
+use pocketmine\math\Vector3;
+use pocketmine\tile\Sign;
+use pocketmine\event\block\BlockBreakEvent;
 
 class Main extends PluginBase implements Listener{
 
@@ -27,9 +31,6 @@ class Main extends PluginBase implements Listener{
         if($tile instanceof Sign){
             // Free sign
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
-                $event->setCancelled(true);
-                if(!$event->getPlayer()->hasPermission("1v1.sign")){
-                    $event->getPlayer()->sendMessage(TextFormat::RED . "You don't have permissions to use this sign");
-                      }elseif{
+              
                         
             
