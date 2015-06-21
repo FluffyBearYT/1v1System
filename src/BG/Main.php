@@ -16,21 +16,79 @@ use pocketmine\event\block\BlockBreakEvent;
 
 class Main extends PluginBase implements Listener{
 
+    /** @var Config sign */
+    public $sign;
+    
   public function onEnable(){
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->saveDefaultConfig();
     $config = $this->getConfig();
+    $world = strtolower(trim($event->getLine(1)))
+    $p = //Get the number of players in the specified world
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev" . TextFormat::GREEN . "and " . TextFormat::RED . "FluffyBearYT");
   }
   public function onDisable(){
     $this->saveDefaultConfig();
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::RED . " I've been disabled! Created By: " . TextFormat::GREEN . "ItzBulkDev" . TextFormat::RED . "and " . TextFormat::GREEN . "FluffyBearYT");
   }
-      public function onSignTap(PlayerInteractEvent $event){
-        $tile = $event->getBlock()->getLevel()->getTile(new Vector3($event->getBlock()->getFloorX(), $event->getBlock()->getFloorY(), $event->getBlock()->getFloorZ()));
+    public function onSignChange(SignChangeEvent $event){
+        $player = $event->getPlayer();
+        if(strtolower(trim($event->getLine(0))) == "[1v1]" || strtolower(trim($event->getLine(0))) == "1v1"){
+            if($player->hasPermission("1v1")){
+                $event->setLine(0,TextFormat::GREEN."[1v1]");
+                $event->setLine(1,TextFormat::YELLOW."WORLD: [$world]");
+                $event->setLine(2,TextFormat::BLUE."PLAYERS: ".TextFormat::GREEN.$p"/".TextFormat::RED."2");
+                $event->setLine(3,TextFormat::LIGHT_PURPLE."RUNNING");
+                $this->sign->setNested("sign.x", $event->getBlock()->getX());
+                $this->sign->setNested("sign.y", $event->getBlock()->getY());
+                $this->sign->setNested("sign.z", $event->getBlock()->getZ());
+                $this->sign->setNested("sign.enabled", true);
+                $this->sign->setNested("sign.level", $world);
+                $this->sign->save();
+                $this->sign->reload();
+                $player->sendMessage("[1v1] Sign Created!");
+            }else{
+                $player->sendMessage([1v1] You have no permission!);
+                $event->setCancelled();
+            }
+        }
+    }
+        public function onPlayerBreakBlock(BlockBreakEvent $event){
+        if ($event->getBlock()->getID() == Item::SIGN || $event->getBlock()->getID() == Item::WALL_SIGN || $event->getBlock()->getID() == Item::SIGN_POST) {
+            $signt = $event->getBlock();
+            if (($tile = $signt->getLevel()->getTile($signt))){
+                if($tile instanceof Sign) {
+                    if ($event->getBlock()->getX() == $this->sign->getNested("sign.x") || $event->getBlock()->getY() == $this->sign->getNested("sign.y") || $event->getBlock()->getZ() == $this->sign->getNested("sign.z")) {
+                        if($event->getPlayer()->hasPermission("1v1.break")) {
+                            $this->sign->setNested("sign.x", $event->getBlock()->getX());
+                            $this->sign->setNested("sign.y", $event->getBlock()->getY());
+                            $this->sign->setNested("sign.z", $event->getBlock()->getZ());
+                            $this->sign->setNested("sign.enabled", false);
+                            $this->sign->setNested("sign.level", "world");
+                            $this->sign->save();
+                            $this->sign->reload();
+                            $event->getPlayer()->sendMessage("[1v1] Sign destroyed!");
+                        }else{
+                            $event->getPlayer()->sendMessage("[1v1] You have no permissions!");
+                            $event->setCancelled();
+                        }
+                    }
+                }
+            }
+        }
+        }
+  
+      public function onTouch(PlayerInteractEvent $event){
+        $tile = $event->getBlock()->getX() == $this->sign->getNested("sign.x") || $event->getBlock()->getY() == $this->sign->getNested("sign.y") || $event->getBlock()->getZ() == $this->sign->getNested("sign.z")
         if($tile instanceof Sign){
-            // Free sign
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
-              
+               $event->teleport($world->getSafeSpawn());
+                $event->getPlayer()->sendPopup(TextFormat::GREEN . "Teleporting To 1v1 Match!");
+                }
+}
+                
+                }
+                
+                //Finish maybe tomorrow :)
                         
             
