@@ -23,13 +23,14 @@ class Main extends PluginBase implements Listener{
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->saveDefaultConfig();
     $config = $this->getConfig();
-    $nopermmsg = $config->get("No-Permission-Message")
-    $tpmsg = $config->get("Telporting-Message")
-    $color = $config->get("Teleporting-Message-Color")
-    $createmsg = $config->get("Sign-Create-Message")
-    $destroymsg = $config->get("Sign-Destroy-Message")
+    $nopermmsg = $config->get("No-Permission-Message");
+    $tpmsg = $config->get("Telporting-Message");
+    $color = $config->get("Teleporting-Message-Color");
+    $limitmsg = $config->get("World-Full-Message");
+    $createmsg = $config->get("Sign-Create-Message");
+    $destroymsg = $config->get("Sign-Destroy-Message");
     $world = strtolower(trim($event->getLine(1)))
-    $p = //Get the number of players in the specified world
+    $p = count($this->getServer()->getLevelByName($world)->getPlayers());
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev" . TextFormat::GREEN . "and " . TextFormat::RED . "FluffyBearYT");
   }
   public function onDisable(){
@@ -84,11 +85,16 @@ class Main extends PluginBase implements Listener{
         }
   
       public function onTouch(PlayerInteractEvent $event){
-        $tile = $event->getBlock()->getX() == $this->sign->getNested("sign.x") || $event->getBlock()->getY() == $this->sign->getNested("sign.y") || $event->getBlock()->getZ() == $this->sign->getNested("sign.z")
+        $tile = $event->getBlock()->getX() == $this->sign->getNested("sign.x") || $event->getBlock()->getY() == $this->sign->getNested("sign.y") || $event->getBlock()->getZ() == $this->sign->getNested("sign.z");
         if($tile instanceof Sign){
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
                 $event->getPlayer()->sendPopup(TextFormat::$color . $tpmsg);
+                }elseif{
+                    $p == "2" {
+                        $event->getPlayer()->sendMessage($limitmsg);
+                        $event->setCancelled();
+                    }
                 }
 }
                 
