@@ -1,0 +1,6 @@
+name: 1v1System
+author: ItzBulkDev/FluffyBearYT
+version: 1.0
+main: BG\Main
+api: [1.12.0]
+website: https://github.com/FluffyBearYT/1v1System
