@@ -25,14 +25,14 @@ class Main extends PluginBase implements Listener{
         @mkdir($this->getDataFolder());
         $this->configFile = (new Config($this->getDataFolder()."countdown.yml", Config::YAML, array(
             "countdown" => array(
-                "Starting In 5...",
-                "Starting In 4...",
-                "Starting In 3...",
-                "Starting In 2...",
-                "Starting In 1...",
+                "Starting In §45§2...",
+                "Starting In §44§2...",
+                "Starting In §43§2...",
+                "Starting In §42§2...",
+                "Starting In §41§2...",
                 "GO!!!!"
             ),
-            "Countdown-Color" => "GREEN"
+            "Countdown-Color" => "§2"
         )))->getAll();
 
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
