@@ -129,7 +129,7 @@ class Main extends PluginBase implements Listener{
 }
                 
                 }
-                public function onPlayerDeath(PlayerDeathEvent $event){
+                public function onDeath(PlayerDeathEvent $event){
                     $cause = $event->getEntity()->getLastDamageCause();
                         if($cause instanceof EntityDamageByEntityEvent) {
                             $player = $event->getEntity();
