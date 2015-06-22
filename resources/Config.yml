@@ -1,10 +1,10 @@
 //Any unpermissioned use of this plugin may be subjected to CopyRights
 
 //If the user isn't OP when trying to create/break a sign, This Message will appear:
-No-Permission-Message: "[1v1] You don't have permission!"
+No-Permission-Message: "§9§o[§a1v1§o§9] §4You don't have permission!"
 
 //When The User is teleportig to the 1v1 Match, This POPUP will appear:
-Telporting-Message: Joining a 1v1 Match!
+Telporting-Message: "§aJoining a 1v1 Match!"
 
 //Teleporting Color:
 //Available Colors:
@@ -14,23 +14,22 @@ Telporting-Message: Joining a 1v1 Match!
 //YELLOW/ORANGE = §6
 //AQUA = §3
 //BLUE = §9
-Teleporting-Message-Color: §9
 
 //When a 1v1 Sign Is Created, This Message Will Appear:
-Sign-Create-Message: "[1v1] Sign Created!"
+Sign-Create-Message: "§9§o[§a1v1§o§9] §6Sign §2Created!"
 
 //When a 1v1 Sign Is Destroyed, This Message Will Appear:
-Sign-Destroy-Message: "[1v1] Sign Destroyed!"
+Sign-Destroy-Message: "§9§o[§a1v1§o§9] §6Sign §4Destroyed!"
 
 //When World Is Full, This Message Will Appear:
-World-Full-Message: "[1v1] This Match Is Full!"
+World-Full-Message: "§9§o[§a1v1§o§9] §4This Match Is Full!"
 
 //Tells the player to get in a corner:
-Get-In-Corner-Message: "[1v1] Get In a corner!"
+Get-In-Corner-Message: "§9§o[§a1v1§o§9] §6Get In a corner!"
 
 //When player dies in World, This Message Will Appear:
-Player-Death-Message: "[1v1] You Lost the match to $killer !"
+Player-Death-Message: "§5You Lost the match to §4 $killer !"
 
 //When the killer kills a player in World, This Message Will Appear:
-Killer-Win-Message: "[1v1] You won the match to $player !"
+Killer-Win-Message: "§2You won the match to §4 $player !"
 
