@@ -13,6 +13,7 @@ use pocketmine\event\block\SignChangeEvent;
 use pocketmine\math\Vector3;
 use pocketmine\tile\Sign;
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\math\Vector3;
 
 class Main extends PluginBase implements Listener{
 
@@ -41,6 +42,7 @@ class Main extends PluginBase implements Listener{
         $player = $event->getPlayer();
         if(strtolower(trim($event->getLine(0))) == "[1v1]" || strtolower(trim($event->getLine(0))) == "1v1"){
             if($player->hasPermission("1v1")){
+                //Detects if its a 1v1 sign, changes lines
                 $event->setLine(0,TextFormat::GREEN."[1v1]");
                 $event->setLine(1,TextFormat::YELLOW."WORLD: [$world]");
                 $event->setLine(2,TextFormat::BLUE."PLAYERS: ".TextFormat::GREEN.$p"/".TextFormat::RED."2");
@@ -90,7 +92,10 @@ class Main extends PluginBase implements Listener{
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
                 $event->getPlayer()->sendPopup(TextFormat::$color . $tpmsg);
-                }elseif($p == "2"){
+                //Gives Full Health
+                $player->setHealth(20);
+                }else{
+                    if($p == "2"){
                         $event->getPlayer()->sendMessage($limitmsg);
                         $event->setCancelled();
                     }
