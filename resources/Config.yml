@@ -29,3 +29,6 @@ Sign-Destroy-Message: "[1v1] Sign Destroyed!"
 
 //When World Is Full, This Message Will Appear:
 World-Full-Message: "[1v1] This Match Is Full!"
+
+//Tells the player to get in a corner:
+Get-In-Corner-Message: "[1v1] Get In a corner!"
