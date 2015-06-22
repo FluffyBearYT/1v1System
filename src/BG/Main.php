@@ -130,14 +130,20 @@ class Main extends PluginBase implements Listener{
                 
                 }
                 public function onDeath(PlayerDeathEvent $event){
-                    $cause = $event->getEntity()->getLastDamageCause();
-                        if($cause instanceof EntityDamageByEntityEvent) {
-                            $player = $event->getEntity();
-                            $killer = $event->getEntity()->getLastDamageCause()->getDamager();
-                                if($killer instanceof Player) {
-                                    $player->getPlayer()->sendPopup($playermsg);
-                                    $killer->getPlayer()->sendPopup($killermsg);
-                                    $killer->teleport($killer->getServer()->getDefaultLevel()->getSpawnLocation());
+                    $check = $player->getLevel();
+                    if($check == "pvp1", "pvp2", "pvp3", "pvp4", "pvp5", "pvp6", "pvp7", "pvp8"){
+                        $cause = $event->getEntity()->getLastDamageCause();
+                            if($cause instanceof EntityDamageByEntityEvent) {
+                                $player = $event->getEntity();
+                                $killer = $event->getEntity()->getLastDamageCause()->getDamager();
+                                    if($killer instanceof Player) {
+                                        $player->getPlayer()->sendPopup($playermsg);
+                                        $killer->getPlayer()->sendPopup($killermsg);
+                                        $killer->teleport($killer->getServer()->getDefaultLevel()->getSpawnLocation());
+                                    }
+                            }
+                    }
+                }
                     
             
                     
