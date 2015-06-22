@@ -14,6 +14,7 @@ use pocketmine\math\Vector3;
 use pocketmine\tile\Sign;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\math\Vector3;
+use pocketmine\scheduler\PluginTask;
 
 class Main extends PluginBase implements Listener{
 
