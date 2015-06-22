@@ -108,7 +108,7 @@ class Main extends PluginBase implements Listener{
         $tile = $event->getBlock()->getX() == $this->sign->getNested("sign.x") || $event->getBlock()->getY() == $this->sign->getNested("sign.y") || $event->getBlock()->getZ() == $this->sign->getNested("sign.z");
         if($tile instanceof Sign){
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
-               $event->teleport($world->getSafeSpawn());
+               $event->teleport($world->getSpawnLocation());
                foreach($event as $players)
                 $event->getPlayer()->sendPopup($color ."" . $tpmsg . "");
                 $event->getPlayer()->sendMessage($cornermsg);
@@ -135,8 +135,9 @@ class Main extends PluginBase implements Listener{
                             $player = $event->getEntity();
                             $killer = $event->getEntity()->getLastDamageCause()->getDamager();
                                 if($killer instanceof Player) {
-                            $players->getPlayer()->sendPopup($playermsg);
-                            $killer->getPlayer()->sendPopup($killermsg);
+                                    $player->getPlayer()->sendPopup($playermsg);
+                                    $killer->getPlayer()->sendPopup($killermsg);
+                                    $killer->teleport($killer->getServer()->getDefaultLevel()->getSpawnLocation());
                     
             
                     
