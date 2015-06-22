@@ -62,7 +62,7 @@ class Main extends PluginBase implements Listener{
                 $event->setLine(0,TextFormat::GREEN."[1v1]");
                 $event->setLine(1,TextFormat::YELLOW."WORLD: [$world]");
                 $event->setLine(2,TextFormat::BLUE."PLAYERS: ".TextFormat::GREEN.$p"/".TextFormat::RED."2");
-                $event->setLine(3,TextFormat::LIGHT_PURPLE."RUNNING");
+                $event->setLine(3,TextFormat::LIGHT_PURPLE."");
                 $this->sign->setNested("sign.x", $event->getBlock()->getX());
                 $this->sign->setNested("sign.y", $event->getBlock()->getY());
                 $this->sign->setNested("sign.z", $event->getBlock()->getZ());
@@ -129,8 +129,11 @@ class Main extends PluginBase implements Listener{
                 }
                 public function onPlayerDeath(PlayerDeathEvent $event){
                     $cause = $event->getEntity()->getLastDamageCause();
-                    $event->getPlayer()->getName();
-                    $event->getPlayer()->sendPopup("You have lost the 1v1!!");
+                        if($cause instanceof EntityDamageByEntityEvent) {
+                            $player = $event->getEntity();
+                            $killer = $event->getEntity()->getLastDamageCause()->getDamager();
+                                if($killer instanceof Player) {
+                                    //Ok, SO I added the things u need. Your task is to send the popups
                     
             
                     
