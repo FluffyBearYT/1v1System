@@ -133,7 +133,8 @@ class Main extends PluginBase implements Listener{
                             $player = $event->getEntity();
                             $killer = $event->getEntity()->getLastDamageCause()->getDamager();
                                 if($killer instanceof Player) {
-                                    //Ok, SO I added the things u need. Your task is to send the popups
+                            $players->getPlayer()->sendPopup($playermsg);
+                            $killer->getPlayer()->sendPopup($killermsg);
                     
             
                     
