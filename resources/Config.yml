@@ -19,7 +19,7 @@ Teleporting-Message-Color: §9
 //When a 1v1 Sign Is Created, This Message Will Appear:
 Sign-Create-Message: "[1v1] Sign Created!"
 
-//When a 1v1 SIgn Is Destroyed, This Message WIll Appear:
+//When a 1v1 Sign Is Destroyed, This Message Will Appear:
 Sign-Destroy-Message: "[1v1] Sign Destroyed!"
 
 //When World Is Full, This Message Will Appear:
@@ -27,3 +27,6 @@ World-Full-Message: "[1v1] This Match Is Full!"
 
 //Tells the player to get in a corner:
 Get-In-Corner-Message: "[1v1] Get In a corner!"
+
+//When player dies in World, This Message Will Appear:
+Player-Death-Message: "[1v1] You Lost the match to $player !!"
