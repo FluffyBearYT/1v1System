@@ -42,7 +42,6 @@ class Main extends PluginBase implements Listener{
     $cornermsg = $config->get("Get-In-Corner-Message");
     $tpmsg = $config->get("Telporting-Message");
     $color = $config->get("Teleporting-Message-Color");
-    $color1 = $config->get("Get-In-Corner-Color");
     $color2 = $this->confiFile->get("Countdown-Color");
     $limitmsg = $config->get("World-Full-Message");
     $createmsg = $config->get("Sign-Create-Message");
@@ -109,8 +108,8 @@ class Main extends PluginBase implements Listener{
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
                foreach($event as $players)
-                $event->getPlayer()->sendPopup(TextFormat::$color "" . $tpmsg . "");
-                $event->getPlayer()->sendMessage(TextFormat::$color1 "" . $cornermsg . "");
+                $event->getPlayer()->sendPopup($color ."" . $tpmsg . "");
+                $event->getPlayer()->sendMessage($cornermsg);
                 //Gives Full Health
                 $event->getPlayer()->setHealth(20);
                 }else{
@@ -120,7 +119,7 @@ class Main extends PluginBase implements Listener{
                                 $countdown = $this->plugin->configFile["countodown"];
                                 $messagekey = array_rand($countdown, 1);
                                 $countmsg = $countdown[$messagekey];
-                        $players->getPlayer()->sendPopup(TextFormat::$color2 "" . $countmsg . "");
+                        $players->getPlayer()->sendPopup($color2 ."" . $countmsg . "");
                         $event->getPlayer()->sendMessage($limitmsg);
                         $event->setCancelled();
                     }
