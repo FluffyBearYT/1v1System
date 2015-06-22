@@ -21,12 +21,28 @@ class Main extends PluginBase implements Listener{
     public $sign;
     
   public function onEnable(){
+        @mkdir($this->getDataFolder());
+        $this->configFile = (new Config($this->getDataFolder()."countdown.yml", Config::YAML, array(
+            "countdown" => array(
+                "Starting In 5...",
+                "Starting In 4...",
+                "Starting In 3...",
+                "Starting In 2...",
+                "Starting In 1...",
+                "GO!!!!"
+            ),
+            "Countdown-Color" => "GREEN"
+        )))->getAll();
+
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
     $this->saveDefaultConfig();
     $config = $this->getConfig();
     $nopermmsg = $config->get("No-Permission-Message");
+    $cornermsg = $config->get("Get-In-Corner-Message");
     $tpmsg = $config->get("Telporting-Message");
     $color = $config->get("Teleporting-Message-Color");
+    $color1 = $config->get("Get-In-Corner-Color");
+    $color2 = $this->confiFile->get("Countdown-Color");
     $limitmsg = $config->get("World-Full-Message");
     $createmsg = $config->get("Sign-Create-Message");
     $destroymsg = $config->get("Sign-Destroy-Message");
@@ -91,11 +107,19 @@ class Main extends PluginBase implements Listener{
         if($tile instanceof Sign){
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSafeSpawn());
-                $event->getPlayer()->sendPopup(TextFormat::$color . $tpmsg);
+               foreach($event as $players)
+                $event->getPlayer()->sendPopup(TextFormat::$color "" . $tpmsg . "");
+                $event->getPlayer()->sendMessage(TextFormat::$color1 "" . $cornermsg . "");
                 //Gives Full Health
-                $player->setHealth(20);
+                $event->getPlayer()->setHealth(20);
                 }else{
                     if($p == "2"){
+                        $time = intval("5") * 20;
+                        $this->getServer()->getScheduler()->scheduleRepeatingTask(new 1v1System($this), $time);
+                                $countdown = $this->plugin->configFile["countodown"];
+                                $messagekey = array_rand($countdown, 1);
+                                $countmsg = $countdown[$messagekey];
+                        $players->getPlayer()->sendPopup(TextFormat::$color2 "" . $countmsg . "");
                         $event->getPlayer()->sendMessage($limitmsg);
                         $event->setCancelled();
                     }
