@@ -8,18 +8,13 @@ Telporting-Message: Joining a 1v1 Match!
 
 //Teleporting Color:
 //Available Colors:
-//USE ALL CAPS
-//GREEN
-//DARK_GREEN
-//RED
-//DARK_RED
-//LIGHT_PURPLE
-//DARK_PURPLE
-//YELLOW
-//AQUA
-//BLUE
-//GOLD
-Teleporting-Message-Color: BLUE
+//GREEN = §2
+//RED = §4
+//PURPLE = §5
+//YELLOW/ORANGE = §6
+//AQUA = §3
+//BLUE = §9
+Teleporting-Message-Color: §9
 
 //When a 1v1 Sign Is Created, This Message Will Appear:
 Sign-Create-Message: "[1v1] Sign Created!"
