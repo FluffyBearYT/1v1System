@@ -39,6 +39,8 @@ class Main extends PluginBase implements Listener{
     $this->saveDefaultConfig();
     $config = $this->getConfig();
     $nopermmsg = $config->get("No-Permission-Message");
+    $killermsg = $config->get("Killer-Win-Message");
+    $playermsg = $config->get("Player-Death-Message");
     $cornermsg = $config->get("Get-In-Corner-Message");
     $tpmsg = $config->get("Telporting-Message");
     $color = $config->get("Teleporting-Message-Color");
@@ -46,7 +48,7 @@ class Main extends PluginBase implements Listener{
     $limitmsg = $config->get("World-Full-Message");
     $createmsg = $config->get("Sign-Create-Message");
     $destroymsg = $config->get("Sign-Destroy-Message");
-    $world = strtolower(trim($event->getLine(1)))
+    $world = strtolower(trim($event->getLine(1)));
     $p = count($this->getServer()->getLevelByName($world)->getPlayers());
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev" . TextFormat::GREEN . "and " . TextFormat::RED . "FluffyBearYT");
   }
