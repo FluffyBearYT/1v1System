@@ -127,7 +127,14 @@ class Main extends PluginBase implements Listener{
 }
                 
                 }
+                public function onPlayerDeath(PlayerDeathEvent $event){
+                    $cause = $event->getEntity()-.getLastDamageCuase();
+                    $event->getPlayer()->sendPopup("You have lost the 1v1!!")
+                    
+            
+                    
                 
-                //Finish maybe tomorrow :)
+                
+                
                         
             
