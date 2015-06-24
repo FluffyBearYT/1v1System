@@ -48,6 +48,7 @@ class Main extends PluginBase implements Listener{
     $limitmsg = $config->get("World-Full-Message");
     $createmsg = $config->get("Sign-Create-Message");
     $destroymsg = $config->get("Sign-Destroy-Message");/*/
+    $this->sign = $event->getBlock();
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE . "]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev");
   }
   public function onDisable(){
