@@ -36,8 +36,8 @@ class Main extends PluginBase implements Listener{
         )))->getAll();
 
     $this->getServer()->getPluginManager()->registerEvents($this, $this);
-    $this->saveDefaultConfig();
-    $config = $this->getConfig();
+   // $this->saveDefaultConfig();
+    /*/$config = $this->getConfig();
     $nopermmsg = $config->get("No-Permission-Message");
     $killermsg = $config->get("Killer-Win-Message");
     $playermsg = $config->get("Player-Death-Message");
@@ -47,13 +47,13 @@ class Main extends PluginBase implements Listener{
     $color2 = $this->confiFile->get("Countdown-Color");
     $limitmsg = $config->get("World-Full-Message");
     $createmsg = $config->get("Sign-Create-Message");
-    $destroymsg = $config->get("Sign-Destroy-Message");
+    $destroymsg = $config->get("Sign-Destroy-Message");/*/
     $world = strtolower(trim($event->getLine(1)));
     $p = count($this->getServer()->getLevelByName($world)->getPlayers());
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::GREEN . " I've been enabled! Created By: " . TextFormat::RED . "ItzBulkDev" . TextFormat::GREEN . "and " . TextFormat::RED . "FluffyBearYT");
   }
   public function onDisable(){
-    $this->saveDefaultConfig();
+    //$this->saveDefaultConfig();
     $this->getLogger()->info(TextFormat::BLUE."[" . TextFormat::LIGHT_PURPLE . "1v1" . TextFormat::BLUE"]" . TextFormat::RED . " I've been disabled! Created By: " . TextFormat::GREEN . "ItzBulkDev" . TextFormat::RED . "and " . TextFormat::GREEN . "FluffyBearYT");
   }
     public function onSignChange(SignChangeEvent $event){
@@ -72,10 +72,10 @@ class Main extends PluginBase implements Listener{
                 $this->sign->setNested("sign.level", $world);
                 $this->sign->save();
                 $this->sign->reload();
-                $player->sendMessage($createmsg);
+                $player->sendMessage("§9§o[§a1v1§o§9] §6Sign §2Created!");
             }else{
-                $player->sendMessage($nopermmsg);
-                $event->setCancelled();
+                $player->sendMessage("§9§o[§a1v1§o§9] §4You don't have permission!");
+                $event->setCancelled(true);
             }
         }
     }
@@ -93,9 +93,9 @@ class Main extends PluginBase implements Listener{
                             $this->sign->setNested("sign.level", "world");
                             $this->sign->save();
                             $this->sign->reload();
-                            $event->getPlayer()->sendMessage("$destroymsg");
+                            $event->getPlayer()->sendMessage("§9§o[§a1v1§o§9] §6Sign §4Destroyed!");
                         }else{
-                            $event->getPlayer()->sendMessage("$nopermmsg");
+                            $event->getPlayer()->sendMessage("§9§o[§a1v1§o§9] §4You don't have permission!");
                             $event->setCancelled();
                         }
                     }
@@ -110,8 +110,8 @@ class Main extends PluginBase implements Listener{
             if(TextFormat::clean($tile->getText()[0], true) === "[1v1]"){
                $event->teleport($world->getSpawnLocation());
                foreach($event as $players)
-                $event->getPlayer()->sendPopup($color ."" . $tpmsg . "");
-                $event->getPlayer()->sendMessage($cornermsg);
+                $event->getPlayer()->sendPopup(§aJoining 1v1 Match!);
+                $event->getPlayer()->sendMessage("§9§o[§a1v1§o§9] §6Get In a corner!");
                 //Gives Full Health
                 $event->getPlayer()->setHealth(20);
                 }else{
@@ -121,8 +121,8 @@ class Main extends PluginBase implements Listener{
                                 $countdown = $this->plugin->configFile["countodown"];
                                 $messagekey = array_rand($countdown, 1);
                                 $countmsg = $countdown[$messagekey];
-                        $players->getPlayer()->sendPopup($color2 ."" . $countmsg . "");
-                        $event->getPlayer()->sendMessage($limitmsg);
+                        $players->getPlayer()->sendPopup($countmsg);
+                        $event->getPlayer()->sendMessage("§9§o[§a1v1§o§9] §4This Match Is Full!");
                         $event->setCancelled();
                     }
                 }
@@ -137,9 +137,9 @@ class Main extends PluginBase implements Listener{
                                 $player = $event->getEntity();
                                 $killer = $event->getEntity()->getLastDamageCause()->getDamager();
                                     if($killer instanceof Player) {
-                                        $player->getPlayer()->sendPopup($playermsg);
-                                        $killer->getPlayer()->sendPopup($killermsg);
-                                        $killer->teleport($killer->getServer()->getDefaultLevel()->getSpawnLocation());
+                                        $player->getPlayer()->sendPopup("§5You Lost the match to §4" . $killer . "!");
+                                        $killer->getPlayer()->sendPopup("§2You won the match to §4" . $player . "!");
+                                        $killer->teleport($this->getServer()->getDefaultLevel()->getSpawnLocation());
                                     }
                             }
                     }
