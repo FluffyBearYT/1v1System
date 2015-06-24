@@ -1,6 +1,11 @@
-name: 1v1System
-author: ItzBulkDev/FluffyBearYT
+name: OnevOne
+author: ItzBulkDev
 version: 1.0
-main: BG\Main
+main: OnevOne\Main
 api: [1.12.0]
 website: https://github.com/FluffyBearYT/1v1System
+
+permissions:
+    1v1.all:
+        default: op
+        description: "Allow to access to every 1v1 Feature"
