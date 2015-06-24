@@ -130,8 +130,9 @@ class Main extends PluginBase implements Listener{
                 
                 }
                 public function onDeath(PlayerDeathEvent $event){
+                    $player = $event->getEntity()->getPlayer()->getName();
                     $check = $player->getLevel();
-                    if($check == "pvp1", "pvp2", "pvp3", "pvp4", "pvp5", "pvp6", "pvp7", "pvp8"){
+                    if($check == "pvp1" || "pvp2" || "pvp3" || "pvp4" || "pvp5" || "pvp6" || "pvp7" || "pvp8"){
                         $cause = $event->getEntity()->getLastDamageCause();
                             if($cause instanceof EntityDamageByEntityEvent) {
                                 $player = $event->getEntity();
@@ -144,6 +145,8 @@ class Main extends PluginBase implements Listener{
                             }
                     }
                 }
+}
+
                     
             
                     
