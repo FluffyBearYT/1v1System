@@ -19,8 +19,23 @@ class Main extends PluginBase implements Listener{
 	public players = array();
    public function onEnable(){
       $this->getServer()->getLogger()->info("[1v1]Enabled!");
-      
-      
+      $this->level=$this->getServer()->getLevelByName($this->config->get("pos1")["level"]);
+      	   $this->signlevel=$this->getServer()->getLevelByName($this->config->get("sign")["level"]);
+			
+		if($this->config->exists("pos2"))
+		{
+			$this->sign=new Vector3($this->sign["x"],$this->sign["y"],$this->sign["z"]);
+			$this->pos1=new Vector3($this->pos1["x"]+0.5,$this->pos1["y"],$this->pos1["z"]+0.5);
+			$this->pos2=new Vector3($this->pos2["x"]+0.5,$this->pos2["y"],$this->pos2["z"]+0.5);
+			$this->sign=$this->config->get("sign");
+			$this->pos1=$this->config->get("pos1");
+			$this->pos2=$this->config->get("pos2");
+		}
+		$this->gameTime=(int)$this->config->get("gameTime");
+		$this->waitTime=(int)$this->config->get("waitTime");
+		$this->gameStatus=0;
+		$this->lastTime=0;
+		$this->SetStatus=array();
       
    }
 
