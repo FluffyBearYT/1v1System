@@ -16,8 +16,9 @@ use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\scheduler\CallbackTask;
 
 class Main extends PluginBase implements Listener{
+	public players = array();
    public function onEnable(){
-      $this->getServer()->getLogger()->info("[1v1]Enabled!")
+      $this->getServer()->getLogger()->info("[1v1]Enabled!");
       
       
       
