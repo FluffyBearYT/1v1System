@@ -179,4 +179,131 @@ $this->changeStatusSign();
 				}
 }
 
-   
+   public function setGame(PlayerInteractEvent $event){
+		$player=$event->getPlayer();
+		$username=$player->getName();
+		$block=$event->getBlock();
+		$levelname=$player->getLevel()->getFolderName();
+		if(isset($this->SetStatus[$username]))
+		{
+			switch ($this->SetStatus[$username])
+			{
+			case 0:
+				if($event->getBlock()->getID() != 63 && $event->getBlock()->getID() != 68) 
+				{
+					$player->sendMessage(TextFormat::GREEN."please choose a sign to click on");
+					return;
+				}
+				$this->sign=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname);
+				$this->config->set("sign",$this->sign);
+				$this->config->save();
+				$this->SetStatus[$username]++;
+				$player->sendMessage(TextFormat::GREEN."SIGN for condition has been created");
+				$player->sendMessage(TextFormat::GREEN." please click on the 1st spawnpoint");
+				$this->signlevel=$this->getServer()->getLevelByName($this->config->get("sign")["level"]);
+				$this->sign=new Vector3($this->sign["x"],$this->sign["y"],$this->sign["z"]);
+				$this->changeStatusSign();
+				break;
+			case 1:
+				$this->pos1=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname);
+				$this->config->set("pos1",$this->pos1);
+				$this->config->save();
+				$this->SetStatus[$username]++;
+				$player->sendMessage(TextFormat::GREEN."  Spawnpoint 1 created");
+				$player->sendMessage(TextFormat::GREEN." Please click on the 2nd spawnpoint");
+				$this->pos1=new Vector3($this->pos1["x"]+0.5,$this->pos1["y"],$this->pos1["z"]+0.5);
+				break;
+			case 2:
+				 $this->pos2=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname);
+				$this->pos2=new Vector3($this->pos2["x"]+0.5,$this->pos2["y"],$this->pos2["z"]+0.5);
+				$this->SetStatus[$username]++;
+				$player->sendMessage(TextFormat::GREEN." spawnpoint 2 created");
+				$this->config->set("pos2",$this->pos2);
+				$this->config->save();
+				$player->sendMessage(TextFormat::GREEN."All settings completed, you can start a game now.");
+				$this->level=$this->getServer()->getLevelByName($this->config->get("pos1")["level"]);	
+				break;
+
+			}
+		}
+		else
+		{
+			$sign=$event->getPlayer()->getLevel()->getTile($event->getBlock());
+			/* if($this->PlayerIsInGame($event->getPlayer()->getName()){
+				 $event->setCancelled(true);
+				 }else{*/
+			if(isset($this->pos2) && $this->pos2!=array() && $sign instanceof Sign && $sign->getX()==$this->sign->x && $sign->getY()==$this->sign->y && $sign->getZ()==$this->sign->z && $event->getPlayer()->getLevel()->getFolderName()==$this->config->get("sign")["level"])
+			{
+			 
+			
+				if(!$this->config->exists("pos2"))
+				{
+				 
+					$event->getPlayer()->sendMessage("You can not join the game for the game hasn't been set yet");
+					return;
+				}
+				if(!$event->getPlayer()->hasPermission("1v1.join.game"))
+				{
+					$event->getPlayer()->sendMessage("§l§cYou don't have permission to join this game");
+					return;
+				}
+				$player = $event->getPlayer();
+				 		if(isset($this->players[$player->getName()]))
+		{	
+
+		return;
+		}
+				if($this->gameStatus==0 || $this->gameStatus==1)
+				{
+					if(!isset($this->players[$event->getPlayer()->getName()]))
+					{
+						if(count($this->players)===8)
+						{
+						
+							return;
+						}  
+
+						$this->players[$event->getPlayer()->getName()]=array("id"=>$event->getPlayer()->getName());
+						
+						if($this->gameStatus==0 && count($this->players)>=1)
+						{
+						 
+							$this->gameStatus=1;
+							$this->lastTime=$this->waitTime;
+						}
+						if(count($this->players)===2 && $this->gameStatus==1 && $this->lastTime>5)
+						{
+						// message here
+							$this->lastTime=5;
+						}
+						$this->changeStatusSign();
+					}
+					else
+					{
+		if($this->PlayerIsInGame($event->getPlayer()->getName())){
+		$event->setCancelled(true);
+		//message here
+					}
+					}
+				}
+				else
+				{
+				//message here
+				}
+			}
+		//}
+
+	}
+	} 
