@@ -64,7 +64,7 @@ class Main extends PluginBase implements Listener{
 			foreach($this->players as $key=>$val)
 			{
 					$p=$this->getServer()->getPlayer($val["id"]);
-					 				
+					 					
 			 				 if(isset($this->players[$p->getName()])){
 			 				 
 			switch($this->lastTime)
@@ -74,8 +74,10 @@ class Main extends PluginBase implements Listener{
 			case 3:
 			case 4:
 			case 5:
+				$p->sendMessage("starts in ".$this->lastTime);	
+				break;
 			case 10:
-
+$p->sendTip("starts in ".$this->lastTime);
 			Break;
 				
 				
@@ -100,8 +102,9 @@ $this->changeStatusSign();
 				{
 				$i++;
 					$p=$this->getServer()->getPlayer($val["id"]);
-				eval("\$p->teleport(\$this->pos".$i.");");
 			
+				eval("\$p->teleport(\$this->pos".$i.");");
+				$p->sendMessage("The 1v1 Has Begun!");
 			
 					 
 			}
@@ -125,17 +128,21 @@ $this->changeStatusSign();
 			case 3:
 			case 4:
 			case 5:
+				$p->sendMessage($this->lastTime." left");
+				break;
 			case 10:
+				$p->sendMessage("10 seconds left");
+				break;
 			case 30:
-			
+			$p->sendMessage("30 seconds left");
 				 
 				break;
 				case 60:
-				 			
+				 	$p->sendMessage("60 seconds lefts");	
 				 				 
 				 				break;
 			case 0: 
-		
+		$p->sendMessage("match has ended");
 
 				foreach($this->players as $pl)
 				{
@@ -251,7 +258,7 @@ $this->changeStatusSign();
 				{
 					if(!isset($this->players[$event->getPlayer()->getName()]))
 					{
-						if(count($this->players)===8)
+						if(count($this->players)===2)
 						{
 						
 							return;
@@ -259,7 +266,7 @@ $this->changeStatusSign();
 
 						$this->players[$event->getPlayer()->getName()]=array("id"=>$event->getPlayer()->getName());
 						
-						if($this->gameStatus==0 && count($this->players)>=1)
+						if($this->gameStatus==0 && count($this->players)===2)
 						{
 						 
 							$this->gameStatus=1;
@@ -268,7 +275,7 @@ $this->changeStatusSign();
 						if(count($this->players)===2 && $this->gameStatus==1 && $this->lastTime>5)
 						{
 						// message here
-							$this->lastTime=5;
+							$this->lastTime=10;
 						}
 						$this->changeStatusSign();
 					}
@@ -289,3 +296,4 @@ $this->changeStatusSign();
 
 	}
 	} 
+}
