@@ -76,25 +76,7 @@ class Main extends PluginBase implements Listener{
 			case 5:
 			case 10:
 
-			case 30:
-			
-				break;
-			case 60:
-			
-				break;
-			case 90:
-			
-
-				break;
-			case 120:
-		
-
-				break;
-			case 150:
-				
-
-				break;
-			case 0:
+			Break;
 				
 				
 			
