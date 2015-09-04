@@ -74,7 +74,7 @@ class Main extends PluginBase implements Listener{
 			case 3:
 			case 4:
 			case 5:
-				$p->sendMessage("starts in ".$this->lastTime);	
+				$p->sendtip("starts in ".$this->lastTime);	
 				break;
 			case 10:
 $p->sendTip("starts in ".$this->lastTime);
